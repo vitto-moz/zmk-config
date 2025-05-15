@@ -8,80 +8,6 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-&behaviors {
-    hm_lctrl: hm_lctrl {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_LCTRL";
-        #binding-cells = <1>;
-        bindings = <&kp A &kp LCTRL>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_lshift: hm_lshift {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_LSHIFT";
-        #binding-cells = <1>;
-        bindings = <&kp D &kp LSHFT>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_lalt: hm_lalt {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_LALT";
-        #binding-cells = <1>;
-        bindings = <&kp S &kp LALT>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_lgui: hm_lgui {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_LGUI";
-        #binding-cells = <1>;
-        bindings = <&kp F &kp LGUI>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_rgui: hm_rgui {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_RGUI";
-        #binding-cells = <1>;
-        bindings = <&kp J &kp RGUI>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_ralt: hm_ralt {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_RALT";
-        #binding-cells = <1>;
-        bindings = <&kp L &kp RALT>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_rshift: hm_rshift {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_RSHIFT";
-        #binding-cells = <1>;
-        bindings = <&kp K &kp RSHFT>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-
-    hm_rctrl: hm_rctrl {
-        compatible = "zmk,behavior-hold-tap";
-        label = "HM_RCTRL";
-        #binding-cells = <1>;
-        bindings = <&kp SEMI &kp RCTRL>;
-        tapping-term-ms = <200>;
-        quick-tap-ms = <150>;
-    };
-};
-
 / {
         keymap {
                 compatible = "zmk,keymap";
@@ -93,9 +19,9 @@
 // | SHFT |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M   |  ,  |  .  |  /  | ESC  |
 //                    | GUI | LWR | SPC |   | ENT | RSE  | ALT |
                         bindings = <
-   &kp TAB   &kp Q    &kp W   &kp E     &kp R   &kp T   &kp Y &kp U    &kp I     &kp O   &kp P    &kp BSPC
-   &kp LCTRL hm_lctrl hm_lalt hm_lshift hm_lgui &kp G   &kp H hm_rgui  hm_rshift hm_ralt hm_rctrl &kp SQT
-   &kp LSHFT &kp Z    &kp X   &kp C     &kp V   &kp B   &kp N &kp M    &kp COMMA &kp DOT &kp FSLH &kp ESC
+   &kp TAB   &kp Q       &kp W    &kp E        &kp R      &kp T   &kp Y &kp U      &kp I        &kp O      &kp P           &kp BSPC
+   &kp LCTRL &mt LCTRL A &mt LALT &mt LSHIFT D &mt LGUI F &kp G   &kp H &mt RGUI J &mt RSHIFT K &mt RALT L &mt RCTRL SEMI  &kp SQT
+   &kp LSHFT &kp Z       &kp X    &kp C        &kp V      &kp B   &kp N &kp M      &kp COMMA    &kp DOT    &kp FSLH        &kp ESC
                   &kp LGUI &mo 1 &kp SPACE   &kp RET &mo 2 &kp RALT
                         >;
                 };
