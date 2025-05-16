@@ -48,7 +48,7 @@
                         bindings = <
    &kp TILDE &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC   &kp PIPE     &kp EXCL  &kp QMARK  &kp UP    &kp EQUAL   &kp GT      &trans
    &trans    &kp LGUI  &kp LALT  &kp LSFT   &kp LCTL   &kp HASH     &kp UNDER &kp LEFT   &kp DOWN  &kp RIGHT   &kp K_CMENU &kp GRAVE
-   &trans    &kp LT    &kp GT    &kp LBKT   &kp RBKT   &kp AMPR     &kp PLUS  &kp MINUS  &kp PLUS  &kp ASTRK   &kp SLASH   &kp TILDE
+   &trans    &kp LT    &kp GT    &kp LBKT   &kp RBKT   &kp AMPS     &kp PLUS  &kp MINUS  &kp PLUS  &kp ASTRK   &kp SLASH   &kp TILDE
                                  &kp LGUI   &trans     &kp SPACE    &kp RET   &trans    &kp RALT
                         >;
                 };
