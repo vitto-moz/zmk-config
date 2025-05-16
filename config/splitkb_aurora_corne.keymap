@@ -46,7 +46,7 @@
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
-   &kp TILDE &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC   &kp PIPE     &kp EXCL  &kp QUES  &kp UP    &kp EQUAL  &kp RABK &kp AT
+   &kp TILDE &kp LPAR  &kp RPAR  &kp LBRC   &kp RBRC   &kp PIPE     &kp EXCL  &kp QUES  &kp UP    &kp EQUAL  &kp GT   &trans
    &trans    &kp LGUI  &kp LALT  &kp LSFT   &kp LCTL   &kp HASH     &kp UNDS  &kp LEFT  &kp DOWN  &kp RIGHT  &kp APP  &kp GRAVE
    &trans    &kp LABK  &kp RABK  &kp LBRC   &kp RBRC   &kp AMPR     &kp PLUS  &kp MINS  &kp PLUS  &kp ASTR   &kp SLSH &kp TILDE
                                  &kp LGUI   &trans     &kp SPACE    &kp RET   &trans    &kp RALT
