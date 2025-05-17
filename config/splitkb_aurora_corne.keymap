@@ -91,10 +91,10 @@
 // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
-   &trans     &kp N1       &kp N2        &kp N3        &kp N7       &kp PIPE       &kp LNLCK  &kp KP_N7     &kp KP_N8   &kp KP_N9    &kp KP_PLUS   &kp DEL
-   &bt BT_CLR &kp LCTL     &kp LALT      &kp LSFT      &kp LGUI     &bt BT_SEL 4   &trans     &kp KP_N4     &kp KP_N0   &kp KP_N6    &kp KP_MINUS  &trans
-   &kp LSHFT  &trans       &kp PRCNT     &trans        &trans       &trans         &trans     &kp KP_N1     &kp KP_N2   &kp KP_N3    &kp KP_DOT    &trans
-                                         &kp LGUI      &trans       &kp SPACE      &kp KP_N0  &kp KP_DIVIDE &kp KP_N5
+   &trans     &kp N1       &kp N2        &kp N3        &kp N7       &kp PIPE       &kp KP_SLASH    &kp KP_N7     &kp KP_N8   &kp KP_N9    &kp KP_PLUS   &kp DEL
+   &bt BT_CLR &kp LCTL     &kp LALT      &kp LSFT      &kp LGUI     &bt BT_SEL 4   &kp KP_ASTERISK &kp KP_N4     &kp KP_N0   &kp KP_N6    &kp KP_MINUS  &trans
+   &kp LSHFT  &trans       &kp PRCNT     &trans        &trans       &trans         &kp KP_NUM      &kp KP_N1     &kp KP_N2   &kp KP_N3    &kp KP_DOT    &trans
+                                         &kp LGUI      &trans       &kp SPACE      &kp KP_N0       &kp KP_DIVIDE &kp KP_N5
                         >;
                 };
 
