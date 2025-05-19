@@ -4,9 +4,3 @@ on: [push, pull_request, workflow_dispatch]
 jobs:
   build:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
-
-
-include:
-  - name: reset
-    board: nice_nano_v2   # Change if you're using a different board
-    shield: settings_reset
