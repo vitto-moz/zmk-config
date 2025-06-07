@@ -25,10 +25,6 @@
                 then-layer = <3>;
                 };
         };
-  
-        &mt {
-                tapping-term-ms = <140>;
-        };
 
         keymap {
                 compatible = "zmk,keymap";
