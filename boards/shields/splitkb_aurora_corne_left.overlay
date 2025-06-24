@@ -1,3 +1,0 @@
-&matrix {
-    row-gpios = <&gpio0 6 GPIO_PULL_UP>, <&gpio0 8 GPIO_PULL_UP>, <&gpio0 11 GPIO_PULL_UP>, <&gpio0 12 GPIO_PULL_UP>;
-};
