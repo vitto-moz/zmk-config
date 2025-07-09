@@ -15,7 +15,7 @@
 };
 
 &mt {
-    tapping-term-ms = <500>; // This is the value already set by default
+    tapping-term-ms = <500>; // The defaut value is 300
     flavor = "balanced";
 };
 
