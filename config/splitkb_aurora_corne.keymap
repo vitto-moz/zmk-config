@@ -15,7 +15,7 @@
 };
 
 &mt {
-    tapping-term-ms = <500>; // The defaut value is 300
+    tapping-term-ms = <300>; // The defaut value is 300
     flavor = "balanced";
 };
 
