@@ -27,6 +27,11 @@
                 key-positions = <7 8>;
                 bindings = <&kp ESC>;
                 };
+                combo_nohm {
+                timeout-ms = <50>;
+                key-positions = <0 11>;
+                bindings = <&tog 5>;
+                };
         };
 
         conditional_layers {
@@ -98,7 +103,7 @@
                 mouse_layer {
 // -----------------------------------------------------------------------------------------
 // |  TAB |  1  |  2  |  3  |  4  |  5  |   |  6  |  7  |  8  |  9  |  0  | BSPC |
-// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |     
+// | BTCLR| BT1 | BT2 | BT3 | BT4 | BT5 |   | LFT | DWN |  UP | RGT |     |
 // | SHFT |     |     |     |     |     |   |     |     |     |     |     |      |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
                         bindings = <
@@ -106,6 +111,20 @@
    &bt BT_CLR &kp LCTL     &kp LALT      &kp LSFT      &kp LGUI     &bt BT_SEL 4   &kp KP_ASTERISK &kp KP_N4     &kp KP_N0   &kp KP_N6    &kp KP_MINUS  &trans
    &kp LSHFT  &trans       &kp PRCNT     &trans        &trans       &trans         &kp KP_NUM      &kp KP_N1     &kp KP_N2   &kp KP_N3    &kp KP_DOT    &trans
                                          &kp LGUI      &trans       &kp SPACE      &kp KP_N0       &kp KP_N5     &kp KP_N5
+                        >;
+                };
+
+                nohm_layer {
+// -----------------------------------------------------------------------------------------
+// | trans |  Q  |  W  |  E  |  R  |  T  |   |  Y  |  U  |  I  |  O  |  P  | trans |
+// | trans |  A  |  S  |  D  |  F  |  G  |   |  H  |  J  |  K  |  L  |  ;  | trans |
+// | trans |  Z  |  X  |  C  |  V  |  B  |   |  N  |  M  |  ,  |  .  |  /  | trans |
+//                     | trans | trans | trans |   | trans | trans | trans |
+                        bindings = <
+   &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans    &trans
+   &trans  &kp A   &kp S   &kp D   &kp F   &trans    &trans  &kp J   &kp K   &kp L   &kp SEMI  &trans
+   &trans  &trans  &trans  &trans  &trans  &trans    &trans  &trans  &trans  &trans  &trans    &trans
+                           &trans  &trans  &trans    &trans  &trans  &trans
                         >;
                 };
 
