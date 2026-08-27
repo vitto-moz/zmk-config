@@ -21,11 +21,13 @@
 # so it builds with the nice_nano board definition. The Mifuny Corne v3 Choc
 # v1 PCB uses the standard Corne pro-micro wiring, so the mainline `corne`
 # shield applies (MX and Choc Corne v3 boards share the same matrix wiring).
+# `nice_nano//zmk` is the short-form ZMK board variant id for nice!nano v2
+# (required since the Zephyr 4.1 board-variant change).
 ---
 include:
-  - board: nice_nano/nrf52840
+  - board: nice_nano//zmk
     shield: corne_left
-  - board: nice_nano/nrf52840
+  - board: nice_nano//zmk
     shield: corne_right
-  - board: nice_nano/nrf52840
+  - board: nice_nano//zmk
     shield: settings_reset
