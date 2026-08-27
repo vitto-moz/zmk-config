@@ -17,14 +17,15 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
+# SuperMini nRF52840 is a nice!nano-compatible board (same pro-micro pinout),
+# so it builds with the nice_nano board definition. The Mifuny Corne v3 Choc
+# v1 PCB uses the standard Corne pro-micro wiring, so the mainline `corne`
+# shield applies (MX and Choc Corne v3 boards share the same matrix wiring).
 ---
 include:
   - board: nice_nano/nrf52840
-    shield: splitkb_aurora_corne_left
+    shield: corne_left
   - board: nice_nano/nrf52840
-    shield: splitkb_aurora_corne_right
+    shield: corne_right
   - board: nice_nano/nrf52840
     shield: settings_reset
-# - board: nice_nano/nrf52840
-#   shield: corne_left
-#   snippet: zmk-usb-logging
