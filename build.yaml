@@ -21,11 +21,12 @@
 # compatible pinout, hence `nice_nano//zmk`) — the `zmk` variant suffix is
 # required since the Zephyr 4.1 board-variant change. Both build here on
 # every push/PR. To build just one on demand, use the "Build one keyboard"
-# workflow (Actions tab -> Run workflow -> keyboard: 1 or 2), which builds
-# from build/keyboard-1.yaml or build/keyboard-2.yaml instead.
+# workflow (Actions tab -> Run workflow -> keyboard: corne or
+# splitkb_aurora_corne), which builds from build/corne.yaml or
+# build/splitkb_aurora_corne.yaml instead.
 #
-# 1. corne_left/corne_right       -> Mifuny Corne v3 Choc v1
-# 2. splitkb_aurora_corne_left/right -> splitkb.com Aurora Corne
+# corne_left/corne_right             -> Mifuny Corne v3 Choc v1
+# splitkb_aurora_corne_left/right    -> splitkb.com Aurora Corne
 ---
 include:
   - board: nice_nano//zmk

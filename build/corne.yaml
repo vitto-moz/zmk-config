@@ -1,5 +1,5 @@
-# Keyboard 1: SuperMini nRF52840 + Mifuny Corne v3 Choc v1
-# Used standalone by the "Build one keyboard" workflow (keyboard: "1").
+# SuperMini nRF52840 + Mifuny Corne v3 Choc v1
+# Used standalone by the "Build one keyboard" workflow (keyboard: "corne").
 ---
 include:
   - board: nice_nano//zmk

@@ -1,5 +1,5 @@
-# Keyboard 2: splitkb.com Aurora Corne
-# Used standalone by the "Build one keyboard" workflow (keyboard: "2").
+# splitkb.com Aurora Corne
+# Used standalone by the "Build one keyboard" workflow (keyboard: "splitkb_aurora_corne").
 ---
 include:
   - board: nice_nano//zmk

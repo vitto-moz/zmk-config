@@ -8,8 +8,8 @@ on:
         default: both
         type: choice
         options:
-          - "1"
-          - "2"
+          - corne # SuperMini nRF52840 + Mifuny Corne v3 Choc v1
+          - splitkb_aurora_corne # splitkb.com Aurora Corne
           - both
 
 jobs:
@@ -17,6 +17,6 @@ jobs:
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
     with:
       build_matrix_path: >-
-        ${{ inputs.keyboard == '1' && 'build/keyboard-1.yaml'
-         || inputs.keyboard == '2' && 'build/keyboard-2.yaml'
+        ${{ inputs.keyboard == 'corne' && 'build/corne.yaml'
+         || inputs.keyboard == 'splitkb_aurora_corne' && 'build/splitkb_aurora_corne.yaml'
          || 'build.yaml' }}
