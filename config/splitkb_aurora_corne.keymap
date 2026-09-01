@@ -3,7 +3,7 @@
  *
  * SPDX-License-Identifier: MIT
  *
- * Keyboard 1: SuperMini nRF52840 + Mifuny Corne v3 Choc v1
+ * Keyboard 2: splitkb.com Aurora Corne
  */
 
 #include "keymap_common.dtsi"

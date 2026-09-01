@@ -1,0 +1,10 @@
+# Keyboard 2: splitkb.com Aurora Corne
+# Used standalone by the "Build one keyboard" workflow (keyboard: "2").
+---
+include:
+  - board: nice_nano//zmk
+    shield: splitkb_aurora_corne_left
+  - board: nice_nano//zmk
+    shield: splitkb_aurora_corne_right
+  - board: nice_nano//zmk
+    shield: settings_reset

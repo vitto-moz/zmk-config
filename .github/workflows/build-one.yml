@@ -1,0 +1,22 @@
+name: Build one keyboard
+on:
+  workflow_dispatch:
+    inputs:
+      keyboard:
+        description: "Which keyboard to build"
+        required: true
+        default: both
+        type: choice
+        options:
+          - "1"
+          - "2"
+          - both
+
+jobs:
+  build:
+    uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main
+    with:
+      build_matrix_path: >-
+        ${{ inputs.keyboard == '1' && 'build/keyboard-1.yaml'
+         || inputs.keyboard == '2' && 'build/keyboard-2.yaml'
+         || 'build.yaml' }}

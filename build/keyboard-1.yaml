@@ -1,0 +1,10 @@
+# Keyboard 1: SuperMini nRF52840 + Mifuny Corne v3 Choc v1
+# Used standalone by the "Build one keyboard" workflow (keyboard: "1").
+---
+include:
+  - board: nice_nano//zmk
+    shield: corne_left
+  - board: nice_nano//zmk
+    shield: corne_right
+  - board: nice_nano//zmk
+    shield: settings_reset

@@ -17,17 +17,24 @@
 #     cmake-args: -DCONFIG_ZMK_STUDIO=y
 #     artifact-name: corne_left_with_studio
 #
-# SuperMini nRF52840 is a nice!nano-compatible board (same pro-micro pinout),
-# so it builds with the nice_nano board definition. The Mifuny Corne v3 Choc
-# v1 PCB uses the standard Corne pro-micro wiring, so the mainline `corne`
-# shield applies (MX and Choc Corne v3 boards share the same matrix wiring).
-# `nice_nano//zmk` is the short-form ZMK board variant id for nice!nano v2
-# (required since the Zephyr 4.1 board-variant change).
+# This repo tracks two keyboards, both on SuperMini nRF52840 (nice!nano-
+# compatible pinout, hence `nice_nano//zmk`) — the `zmk` variant suffix is
+# required since the Zephyr 4.1 board-variant change. Both build here on
+# every push/PR. To build just one on demand, use the "Build one keyboard"
+# workflow (Actions tab -> Run workflow -> keyboard: 1 or 2), which builds
+# from build/keyboard-1.yaml or build/keyboard-2.yaml instead.
+#
+# 1. corne_left/corne_right       -> Mifuny Corne v3 Choc v1
+# 2. splitkb_aurora_corne_left/right -> splitkb.com Aurora Corne
 ---
 include:
   - board: nice_nano//zmk
     shield: corne_left
   - board: nice_nano//zmk
     shield: corne_right
+  - board: nice_nano//zmk
+    shield: splitkb_aurora_corne_left
+  - board: nice_nano//zmk
+    shield: splitkb_aurora_corne_right
   - board: nice_nano//zmk
     shield: settings_reset
