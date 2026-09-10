@@ -94,19 +94,22 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 };
 
 // Per-key RGB (SK6812/WS2812), one LED per switch, 21 per half.
-// Data line on P0.06 following the pin ZMK's own underglow hardware-
-// integration guide uses for nRF52 boards; adjust here if this PCB
-// routes the LED data line to a different pin.
+// Data line pin is unconfirmed for this PCB (no schematic available) --
+// trying candidates from nice!nano's pro_micro map, in order of how
+// commonly boards repurpose them for RGB:
+//   D1 = P0.06 (tried, no light)
+//   D0 = P0.08 (current guess)
+//   D10 = P0.09, D16 = P0.10, D9 = P1.06, D8 = P1.04 (next if this fails)
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
         };
     };
 
     spi3_sleep: spi3_sleep {
         group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            psels = <NRF_PSEL(SPIM_MOSI, 0, 8)>;
             low-power-enable;
         };
     };
