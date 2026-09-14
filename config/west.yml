@@ -1,15 +1,18 @@
 manifest:
   remotes:
-    - name: zmkfirmware
-      url-base: https://github.com/zmkfirmware
     - name: splitkb
       url-base: https://github.com/splitkb
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
+    # splitkb/zmk-halcyon-module's halcyon_dongle board defconfig needs a
+    # couple of Kconfig options (ZMK_EXT_POWER_START, ZMK_BLE_PROFILE_
+    # ADVERTISING) that aren't in zmkfirmware/zmk yet, only in splitkb's own
+    # fork branch (confirmed: main+halcyon-fixes is upstream main + 7 small
+    # commits, 0 behind). zmkfirmware/zmk main fails Kconfig validation.
     - name: zmk
-      remote: zmkfirmware
-      revision: main
+      remote: splitkb
+      revision: main+halcyon-fixes
       import: app/west.yml
     # Provides the halcyon_dongle//zmk board, used as the BLE central for the
     # Aurora Corne dongle builds below (https://docs.splitkb.com/product-guides/halcyon-dongle/firmware).
