@@ -1,7 +1,8 @@
 if SHIELD_SPLITKB_AURORA_CORNE_DONGLE
 
 config ZMK_KEYBOARD_NAME
-    default "Aurora Corne Dongle"
+    # Max 16 chars for the BLE device name.
+    default "Aurora Corne"
 
 config ZMK_SPLIT
     default y
