@@ -111,10 +111,15 @@
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
 // Left col 6 (before the divider): RGB toggle / effect cycle / brightness up.
+// Row 3 col 1 (OUT_TOG): on a dongle build, flips output between USB
+// (plugged-in host) and the currently selected BT_SEL profile (a second,
+// BLE-paired host) -- a no-op on non-dongle/peripheral builds. Not on a
+// thumb key because the two thumb &mo keys are held down to reach this
+// layer, so they can't also be tapped.
                         bindings = <
    &bootloader &kp C_BRI_DN    &kp C_BRI_UP  &kp K_VOL_DN     &kp K_VOL_UP   U_RGB_TOG    &bt BT_CLR   &kp F7   &kp F8    &kp F9   &kp F10  &bt BT_SEL 0
    &sys_reset  &kp LCTL        &kp LALT      &kp LSFT         &kp LGUI       U_RGB_EFF    &bootloader  &kp F4   &kp F5    &kp F6   &kp F11  &bt BT_SEL 1
-   &trans      &kp LT          &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI    &sys_reset   &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
+   &out OUT_TOG &kp LT         &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI    &sys_reset   &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
                                              &kp LGUI         &trans         &kp SPACE    &kp RET      &trans   &kp RALT
                         >;
                 };
