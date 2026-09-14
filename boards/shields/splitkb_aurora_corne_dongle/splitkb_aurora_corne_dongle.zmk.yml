@@ -1,0 +1,8 @@
+file_format: "1"
+id: splitkb_aurora_corne_dongle
+name: splitkb.com Aurora Corne (Halcyon Dongle central)
+type: shield
+url: https://docs.splitkb.com/product-guides/halcyon-dongle/firmware
+requires: [halcyon_dongle]
+features:
+  - keys

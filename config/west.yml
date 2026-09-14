@@ -2,6 +2,8 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: splitkb
+      url-base: https://github.com/splitkb
     # Additional modules containing boards/shields/custom code can be listed here as well
     # See https://docs.zephyrproject.org/3.2.0/develop/west/manifest.html#projects
   projects:
@@ -9,5 +11,10 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    # Provides the halcyon_dongle//zmk board, used as the BLE central for the
+    # Aurora Corne dongle builds below (https://docs.splitkb.com/product-guides/halcyon-dongle/firmware).
+    - name: zmk-halcyon-module
+      remote: splitkb
+      revision: main
   self:
     path: config

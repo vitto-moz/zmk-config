@@ -1,0 +1,10 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ *
+ * Keyboard 2: splitkb.com Aurora Corne, BLE central role running on a
+ * Halcyon Dongle instead of the left half.
+ */
+
+#include "keymap_common.dtsi"

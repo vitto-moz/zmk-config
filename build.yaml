@@ -19,14 +19,22 @@
 #
 # This repo tracks two keyboards, both on SuperMini nRF52840 (nice!nano-
 # compatible pinout, hence `nice_nano//zmk`) — the `zmk` variant suffix is
-# required since the Zephyr 4.1 board-variant change. Both build here on
-# every push/PR. To build just one on demand, use the "Build one keyboard"
-# workflow (Actions tab -> Run workflow -> keyboard: corne or
-# splitkb_aurora_corne), which builds from build/corne.yaml or
-# build/splitkb_aurora_corne.yaml instead.
+# required since the Zephyr 4.1 board-variant change. All entries below
+# build here on every push/PR. To build just one keyboard on demand, use
+# the "Build one keyboard" workflow (Actions tab -> Run workflow ->
+# keyboard: corne, splitkb_aurora_corne, or splitkb_aurora_corne_dongle),
+# which builds from build/corne.yaml, build/splitkb_aurora_corne.yaml, or
+# build/splitkb_aurora_corne_dongle.yaml instead.
 #
 # corne_left/corne_right             -> Mifuny Corne v3 Choc v1
 # splitkb_aurora_corne_left/right    -> splitkb.com Aurora Corne
+#
+# The Aurora Corne also builds in a dongle flavor for the Halcyon Dongle
+# (https://docs.splitkb.com/product-guides/halcyon-dongle/firmware): the
+# dongle takes the central role instead of the left half, so the left half
+# is rebuilt as a peripheral (artifact-name splitkb_aurora_corne_left_
+# peripheral) alongside the standalone central build above. The right half
+# is always a peripheral either way, so it isn't rebuilt a second time here.
 ---
 include:
   - board: nice_nano//zmk
@@ -38,4 +46,12 @@ include:
   - board: nice_nano//zmk
     shield: splitkb_aurora_corne_right
   - board: nice_nano//zmk
+    shield: splitkb_aurora_corne_left
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: splitkb_aurora_corne_left_peripheral
+  - board: halcyon_dongle//zmk
+    shield: splitkb_aurora_corne_dongle
+  - board: nice_nano//zmk
+    shield: settings_reset
+  - board: halcyon_dongle//zmk
     shield: settings_reset
