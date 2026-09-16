@@ -117,10 +117,10 @@
 // thumb key because the two thumb &mo keys are held down to reach this
 // layer, so they can't also be tapped.
                         bindings = <
-   &bootloader &kp C_BRI_DN    &kp C_BRI_UP  &kp K_VOL_DN     &kp K_VOL_UP   U_RGB_TOG    &bt BT_CLR   &kp F7   &kp F8    &kp F9   &kp F10  &bt BT_SEL 0
-   &sys_reset  &kp LCTL        &kp LALT      &kp LSFT         &kp LGUI       U_RGB_EFF    &bootloader  &kp F4   &kp F5    &kp F6   &kp F11  &bt BT_SEL 1
-   &out OUT_TOG &kp LT         &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI    &sys_reset   &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
-                                             &kp LGUI         &trans         &kp SPACE    &kp RET      &trans   &kp RALT
+   &bootloader &kp C_BRI_DN    &kp C_BRI_UP  &kp K_VOL_DN     &kp K_VOL_UP   &rgb_ug RGB_TOG     &bt BT_CLR   &kp F7   &kp F8    &kp F9   &kp F10  &bt BT_SEL 0
+   &sys_reset  &kp LCTL        &kp LALT      &kp LSFT         &kp LGUI       &bl BL_TOG          &bootloader  &kp F4   &kp F5    &kp F6   &kp F11  &bt BT_SEL 1
+   &out OUT_TOG &kp LT         &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI           &sys_reset   &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
+                                             &kp LGUI         &trans         &kp SPACE           &kp RET      &trans   &kp RALT
                         >;
                 };
 
