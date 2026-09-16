@@ -119,7 +119,7 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
         // The 6 underglow LEDs are physically bypassed with a jumper wire
         // straight from DATA to per-key LED#1's DIN, so the chain is now
         // just the 21 per-key LEDs.
-        chain-length = <54>;
+        chain-length = <21>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         reset-delay = <80>;
         // delay-t0h/t0l/t1h/t1l intentionally omitted -- the driver
