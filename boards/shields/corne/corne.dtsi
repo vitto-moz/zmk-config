@@ -97,54 +97,32 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 };
 
 // Per-key RGB (SK6812/WS2812), one LED per switch, 21 per half.
-// D1/P0.06 is confirmed (by continuity) to be the real data pin. The
-// chain works up through the first ~10 LEDs (6 underglow + 4 per-key)
-// then goes dark on two separate, brand-new nRF52840 controllers, while
-// an RP2040 (Liatris) drives the full 27-LED chain fine. Brightness
-// doesn't change the cutoff point, ruling out a power/current ceiling.
-// That combination points at nRF52840's default (standard) GPIO drive
-// strength being too weak to keep a clean signal edge through this many
-// relayed hops -- RP2040's PIO peripheral doesn't have that limitation.
-// High drive (H0H1) didn't change anything -- trying extra-high (E0E1).
-&pinctrl {
-    spi3_default: spi3_default {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
-            nordic,drive-mode = <NRF_DRIVE_E0E1>;
-        };
-    };
+// D1/P0.06 is confirmed (by continuity) to be the real data pin. Over
+// &spi3 (worldsemi,ws2812-spi / nordic,nrf-spim + EasyDMA), the chain
+// reliably cut off after exactly ~10 LEDs on two separate, brand-new
+// nRF52840 controllers -- unaffected by GPIO drive strength (H0H1,
+// E0E1) or by doubling spi-max-frequency, and confirmed count-based
+// (not tied to a specific physical LED/joint) by bypassing the 6
+// underglow LEDs with a jumper: the cutoff moved by exactly 6 LEDs.
+// An RP2040 (Liatris) drives the exact same chain fully over its PIO
+// peripheral with no issue. TEST: switching to worldsemi,ws2812-gpio
+// (bit-banged, no SPI/EasyDMA at all) to see if the SPIM3-specific
+// path is actually the culprit.
+/ {
+    led_strip: ws2812 {
+        compatible = "worldsemi,ws2812-gpio";
+        status = "okay";
 
-    spi3_sleep: spi3_sleep {
-        group1 {
-            psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
-            low-power-enable;
-        };
-    };
-};
-
-&spi3 {
-    compatible = "nordic,nrf-spim";
-    status = "okay";
-
-    pinctrl-0 = <&spi3_default>;
-    pinctrl-1 = <&spi3_sleep>;
-    pinctrl-names = "default", "sleep";
-
-    led_strip: ws2812@0 {
-        compatible = "worldsemi,ws2812-spi";
-        label = "WS2812";
-
-        /* SPI */
-        reg = <0>; /* ignored, but necessary for SPI bindings */
-        spi-max-frequency = <4000000>;
+        gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
 
         /* WS2812 */
         // The 6 underglow LEDs are physically bypassed with a jumper wire
         // straight from DATA to per-key LED#1's DIN, so the chain is now
         // just the 21 per-key LEDs.
         chain-length = <21>;
-        spi-one-frame = <0x70>;
-        spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
+        reset-delay = <80>;
+        // delay-t0h/t0l/t1h/t1l intentionally omitted -- the driver
+        // auto-derives correct NOP counts from the CPU clock frequency.
     };
 };
