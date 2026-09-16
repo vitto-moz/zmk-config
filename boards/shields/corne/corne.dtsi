@@ -139,8 +139,10 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
         spi-max-frequency = <4000000>;
 
         /* WS2812 */
-        // 6 underglow + 21 per-key = 27 total in this one series chain.
-        chain-length = <27>;
+        // The 6 underglow LEDs are physically bypassed with a jumper wire
+        // straight from DATA to per-key LED#1's DIN, so the chain is now
+        // just the 21 per-key LEDs.
+        chain-length = <21>;
         spi-one-frame = <0x70>;
         spi-zero-frame = <0x40>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
