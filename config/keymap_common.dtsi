@@ -21,11 +21,31 @@
 #include <dt-bindings/zmk/rgb.h>
 #define U_RGB_TOG &rgb_ug RGB_TOG
 #define U_RGB_EFF &rgb_ug RGB_EFF
-#define U_RGB_BRI &rgb_ug RGB_BRI
+// Hold-tap pairs (tap = one direction, hold = the other) so each pair
+// only needs one key position instead of two.
+#define U_RGB_BRI_HT &rgb_ht RGB_BRD RGB_BRI
+#define U_RGB_HUE_HT &rgb_ht RGB_HUD RGB_HUI
+#define U_RGB_SPD_HT &rgb_ht RGB_SPD RGB_SPI
 #else
 #define U_RGB_TOG &trans
 #define U_RGB_EFF &trans
-#define U_RGB_BRI &trans
+#define U_RGB_BRI_HT &trans
+#define U_RGB_HUE_HT &trans
+#define U_RGB_SPD_HT &trans
+#endif
+
+#if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW)
+/ {
+    behaviors {
+        rgb_ht: rgb_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&rgb_ug>, <&rgb_ug>;
+        };
+    };
+};
 #endif
 
 &led_strip {
@@ -114,7 +134,10 @@
 // | CTRL |     |     |     |     |     |   |  -  |  =  |  [  |  ]  |  \  |  `   |
 // | SHFT |     |     |     |     |     |   |  _  |  +  |  {  |  }  | "|" |  ~   |
 //                    | GUI |     | SPC |   | ENT |     | ALT |
-// Left col 6 (before the divider): RGB toggle / effect cycle / brightness up.
+// Left col 6 (before the divider): RGB toggle / effect cycle / brightness
+// (tap up, hold down). Right col 7 rows 2-3: RGB hue (tap up, hold down)
+// and RGB effect speed (tap up, hold down) -- these replace what used to
+// be duplicate bootloader/sys_reset keys (still reachable via left col 1).
 // Row 3 col 1 (OUT_TOG): on a dongle build, flips output between USB
 // (plugged-in host) and the currently selected BT_SEL profile (a second,
 // BLE-paired host) -- a no-op on non-dongle/peripheral builds. Not on a
@@ -122,8 +145,8 @@
 // layer, so they can't also be tapped.
                         bindings = <
    &bootloader &kp C_BRI_DN    &kp C_BRI_UP  &kp K_VOL_DN     &kp K_VOL_UP   U_RGB_TOG    &bt BT_CLR   &kp F7   &kp F8    &kp F9   &kp F10  &bt BT_SEL 0
-   &sys_reset  &kp LCTL        &kp LALT      &kp LSFT         &kp LGUI       U_RGB_EFF    &bootloader  &kp F4   &kp F5    &kp F6   &kp F11  &bt BT_SEL 1
-   &out OUT_TOG &kp LT         &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI    &sys_reset   &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
+   &sys_reset  &kp LCTL        &kp LALT      &kp LSFT         &kp LGUI       U_RGB_EFF    U_RGB_HUE_HT &kp F4   &kp F5    &kp F6   &kp F11  &bt BT_SEL 1
+   &out OUT_TOG &kp LT         &kp GT        &kp LBKT         &kp RBKT       U_RGB_BRI_HT U_RGB_SPD_HT &kp F1   &kp F2    &kp F3   &kp F12  &bt BT_SEL 2
                                              &kp LGUI         &trans         &kp SPACE           &kp RET      &trans   &kp RALT
                         >;
                 };
