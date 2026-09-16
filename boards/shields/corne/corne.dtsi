@@ -120,9 +120,15 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
         // straight from DATA to per-key LED#1's DIN, so the chain is now
         // just the 21 per-key LEDs.
         chain-length = <21>;
-        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
-        reset-delay = <80>;
-        // delay-t0h/t0l/t1h/t1l intentionally omitted -- the driver
-        // auto-derives correct NOP counts from the CPU clock frequency.
+        color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_BLUE LED_COLOR_ID_RED>;
+        reset-delay = <280>;
+        // Explicit NOP counts for 350/800/700/600ns T0H/T0L/T1H/T1L,
+        // computed for the nRF52840's 64MHz CPU clock (ns * 64MHz / 1e9).
+        // These match what CONFIG_WS2812_STRIP_GPIO's Kconfig defaults
+        // auto-derive; set explicitly here instead of relying on that.
+        delay-t0h = <22>;
+        delay-t0l = <51>;
+        delay-t1h = <44>;
+        delay-t1l = <38>;
     };
 };
