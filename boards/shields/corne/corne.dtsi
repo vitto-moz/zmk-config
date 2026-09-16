@@ -112,7 +112,7 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
         gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
 
         /* WS2812 */
-        chain-length = <21>;
+        chain-length = <27>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         reset-delay = <80>;
         // delay-t0h/t0l/t1h/t1l intentionally omitted -- the driver
