@@ -96,18 +96,14 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
     };
 };
 
-// Per-key RGB (SK6812/WS2812), one LED per switch, 21 per half.
-// D1/P0.06 is confirmed (by continuity) to be the real data pin. Over
-// &spi3 (worldsemi,ws2812-spi / nordic,nrf-spim + EasyDMA), the chain
-// reliably cut off after exactly ~10 LEDs on two separate, brand-new
-// nRF52840 controllers -- unaffected by GPIO drive strength (H0H1,
-// E0E1) or by doubling spi-max-frequency, and confirmed count-based
-// (not tied to a specific physical LED/joint) by bypassing the 6
-// underglow LEDs with a jumper: the cutoff moved by exactly 6 LEDs.
-// An RP2040 (Liatris) drives the exact same chain fully over its PIO
-// peripheral with no issue. TEST: switching to worldsemi,ws2812-gpio
-// (bit-banged, no SPI/EasyDMA at all) to see if the SPIM3-specific
-// path is actually the culprit.
+// RGB (SK6812/WS2812): 6 underglow + 21 per-key = 27 total in one series
+// chain. D1/P0.06 is the data pin. Originally driven over &spi3
+// (worldsemi,ws2812-spi / nordic,nrf-spim + EasyDMA), the chain reliably
+// cut off after exactly ~10 LEDs on two separate nRF52840 controllers --
+// unaffected by GPIO drive strength or SPI clock speed, and confirmed
+// count-based (not a physical LED/joint defect) by temporarily bypassing
+// the underglow LEDs with a jumper. Switching to worldsemi,ws2812-gpio
+// (bit-banged, no SPI/EasyDMA) resolved it.
 / {
     led_strip: ws2812 {
         compatible = "worldsemi,ws2812-gpio";
@@ -116,10 +112,7 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
         gpios = <&gpio0 6 GPIO_ACTIVE_HIGH>;
 
         /* WS2812 */
-        // The 6 underglow LEDs are physically bypassed with a jumper wire
-        // straight from DATA to per-key LED#1's DIN, so the chain is now
-        // just the 21 per-key LEDs.
-        chain-length = <27>;
+        chain-length = <21>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
         reset-delay = <80>;
         // delay-t0h/t0l/t1h/t1l intentionally omitted -- the driver
