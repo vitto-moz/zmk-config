@@ -136,13 +136,18 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 
         /* SPI */
         reg = <0>; /* ignored, but necessary for SPI bindings */
-        spi-max-frequency = <4000000>;
+        // TEMP DIAGNOSTIC: was 4000000 / 0x70 / 0x40. Doubling the clock
+        // halves total transfer time (27 LEDs: ~1.3ms -> ~0.65ms), to test
+        // whether the LED#10 cutoff is a timing-window-dependent SPIM3/
+        // EasyDMA issue (cutoff point should move/disappear) vs a fixed
+        // bug (cutoff stays at exactly LED#10 regardless of frequency).
+        spi-max-frequency = <8000000>;
 
         /* WS2812 */
         // 6 underglow + 21 per-key = 27 total in this one series chain.
         chain-length = <27>;
-        spi-one-frame = <0x70>;
-        spi-zero-frame = <0x40>;
+        spi-one-frame = <0x78>;
+        spi-zero-frame = <0x60>;
         color-mapping = <LED_COLOR_ID_GREEN LED_COLOR_ID_RED LED_COLOR_ID_BLUE>;
     };
 };
