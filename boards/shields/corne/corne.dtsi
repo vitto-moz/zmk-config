@@ -97,18 +97,20 @@ RC(2,1) RC(2,2) RC(2,3) RC(2,4) RC(2,5)  RC(2,6) RC(2,7) RC(2,8) RC(2,9) RC(2,10
 };
 
 // Per-key RGB (SK6812/WS2812), one LED per switch, 21 per half.
-// Re-testing pin candidates now that the underglow section (which sits
-// earlier in the chain) is fully soldered and confirmed working -- all
-// earlier "no light" results were confounded by that broken chain, so
-// they're not reliable evidence against any of these pins.
-//   D1 = P0.06 (current retest -- ZMK's documented standard pin)
-//   D0 = P0.08, D10 = P0.09, D16 = P0.10, D9 = P1.06, D8 = P1.04,
-//   D2 = P0.17, D3 = P0.20 (previously produced light with the fixed
-//   chain: 6 underglow + 1 per-key -- fall back to this if D1 fails)
+// D1/P0.06 is confirmed (by continuity) to be the real data pin. The
+// chain works up through the first ~10 LEDs (6 underglow + 4 per-key)
+// then goes dark on two separate, brand-new nRF52840 controllers, while
+// an RP2040 (Liatris) drives the full 27-LED chain fine. Brightness
+// doesn't change the cutoff point, ruling out a power/current ceiling.
+// That combination points at nRF52840's default (standard) GPIO drive
+// strength being too weak to keep a clean signal edge through this many
+// relayed hops -- RP2040's PIO peripheral doesn't have that limitation.
+// Forcing high drive strength here to test that theory.
 &pinctrl {
     spi3_default: spi3_default {
         group1 {
             psels = <NRF_PSEL(SPIM_MOSI, 0, 6)>;
+            nordic,drive-mode = <NRF_DRIVE_H0H1>;
         };
     };
 
