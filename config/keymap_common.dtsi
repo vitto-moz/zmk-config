@@ -23,9 +23,9 @@
 #define U_RGB_EFF &rgb_ug RGB_EFF
 // Hold-tap pairs (tap = one direction, hold = the other) so each pair
 // only needs one key position instead of two.
-#define U_RGB_BRI_HT &rgb_ht RGB_BRD RGB_BRI
-#define U_RGB_HUE_HT &rgb_ht RGB_HUD RGB_HUI
-#define U_RGB_SPD_HT &rgb_ht RGB_SPD RGB_SPI
+#define U_RGB_BRI_HT &rgb_bri_ht
+#define U_RGB_HUE_HT &rgb_hue_ht
+#define U_RGB_SPD_HT &rgb_spd_ht
 #else
 #define U_RGB_TOG &trans
 #define U_RGB_EFF &trans
@@ -34,15 +34,66 @@
 #define U_RGB_SPD_HT &trans
 #endif
 
+// Hold-tap bindings can't take parameterized behaviors like &rgb_ug
+// directly (devicetree keymap format limitation -- see
+// https://zmk.dev/docs/keymaps/behaviors/hold-tap), so each direction is
+// wrapped in its own zero-arg macro first.
 #if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW)
 / {
+    macros {
+        rgb_bri_up: rgb_bri_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_BRI>;
+        };
+        rgb_bri_down: rgb_bri_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_BRD>;
+        };
+        rgb_hue_up: rgb_hue_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_HUI>;
+        };
+        rgb_hue_down: rgb_hue_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_HUD>;
+        };
+        rgb_spd_up: rgb_spd_up {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_SPI>;
+        };
+        rgb_spd_down: rgb_spd_down {
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            bindings = <&rgb_ug RGB_SPD>;
+        };
+    };
+
     behaviors {
-        rgb_ht: rgb_hold_tap {
+        rgb_bri_ht: rgb_bri_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
+            #binding-cells = <0>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
-            bindings = <&rgb_ug>, <&rgb_ug>;
+            bindings = <&rgb_bri_down>, <&rgb_bri_up>;
+        };
+        rgb_hue_ht: rgb_hue_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&rgb_hue_down>, <&rgb_hue_up>;
+        };
+        rgb_spd_ht: rgb_spd_hold_tap {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <0>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&rgb_spd_down>, <&rgb_spd_up>;
         };
     };
 };
