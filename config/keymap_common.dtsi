@@ -25,10 +25,11 @@
 #define U_RGB_TOG &rgb_ug RGB_TOG
 #define U_RGB_EFF &rgb_ug RGB_EFF
 // Hold-tap pairs (tap = one direction, hold = the other) so each pair
-// only needs one key position instead of two.
-#define U_RGB_BRI_HT &rgb_bri_ht
-#define U_RGB_HUE_HT &rgb_hue_ht
-#define U_RGB_SPD_HT &rgb_spd_ht
+// only needs one key position instead of two. Hold-taps always take two
+// params (hold, tap); the zero-arg macros below ignore them, hence "0 0".
+#define U_RGB_BRI_HT &rgb_bri_ht 0 0
+#define U_RGB_HUE_HT &rgb_hue_ht 0 0
+#define U_RGB_SPD_HT &rgb_spd_ht 0 0
 
 // Hold-tap bindings can't take parameterized behaviors like &rgb_ug
 // directly (devicetree keymap format limitation -- see
@@ -71,21 +72,21 @@
     behaviors {
         rgb_bri_ht: rgb_bri_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&rgb_bri_down>, <&rgb_bri_up>;
         };
         rgb_hue_ht: rgb_hue_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&rgb_hue_down>, <&rgb_hue_up>;
         };
         rgb_spd_ht: rgb_spd_hold_tap {
             compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <0>;
+            #binding-cells = <2>;
             tapping-term-ms = <200>;
             flavor = "tap-preferred";
             bindings = <&rgb_spd_down>, <&rgb_spd_up>;
