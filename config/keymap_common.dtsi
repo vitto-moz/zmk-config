@@ -14,11 +14,14 @@
 #include <dt-bindings/zmk/behaviors.h>
 #include <dt-bindings/zmk/outputs.h>
 
-// RGB underglow controls fall back to &trans on boards/builds where
-// CONFIG_ZMK_RGB_UNDERGLOW is disabled (e.g. splitkb_aurora_corne today),
-// so this shared keymap keeps building for those.
-#if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW)
 #include <dt-bindings/zmk/rgb.h>
+
+// RGB underglow controls. These can't be gated on CONFIG_ZMK_RGB_UNDERGLOW:
+// devicetree (keymaps included) is preprocessed before Kconfig runs, so
+// CONFIG_* symbols are never defined here and such an #if always took the
+// &trans branch. Builds without underglow still compile -- &rgb_ug is
+// always defined in behaviors.dtsi; its driver just isn't built, so the
+// keys are a no-op there.
 #define U_RGB_TOG &rgb_ug RGB_TOG
 #define U_RGB_EFF &rgb_ug RGB_EFF
 // Hold-tap pairs (tap = one direction, hold = the other) so each pair
@@ -26,19 +29,11 @@
 #define U_RGB_BRI_HT &rgb_bri_ht
 #define U_RGB_HUE_HT &rgb_hue_ht
 #define U_RGB_SPD_HT &rgb_spd_ht
-#else
-#define U_RGB_TOG &trans
-#define U_RGB_EFF &trans
-#define U_RGB_BRI_HT &trans
-#define U_RGB_HUE_HT &trans
-#define U_RGB_SPD_HT &trans
-#endif
 
 // Hold-tap bindings can't take parameterized behaviors like &rgb_ug
 // directly (devicetree keymap format limitation -- see
 // https://zmk.dev/docs/keymaps/behaviors/hold-tap), so each direction is
 // wrapped in its own zero-arg macro first.
-#if IS_ENABLED(CONFIG_ZMK_RGB_UNDERGLOW)
 / {
     macros {
         rgb_bri_up: rgb_bri_up {
@@ -97,7 +92,6 @@
         };
     };
 };
-#endif
 
 &led_strip {
     chain-length = <27>;
