@@ -9,6 +9,7 @@ on:
         type: choice
         options:
           - corne # SuperMini nRF52840 + Mifuny Corne v3 Choc v1
+          - corne_dongle # Mifuny Corne v3 Choc v1 + Halcyon Dongle
           - splitkb_aurora_corne # splitkb.com Aurora Corne
           - splitkb_aurora_corne_dongle # splitkb.com Aurora Corne + Halcyon Dongle
           - both
@@ -19,6 +20,7 @@ jobs:
     with:
       build_matrix_path: >-
         ${{ inputs.keyboard == 'corne' && 'build/corne.yaml'
+         || inputs.keyboard == 'corne_dongle' && 'build/corne_dongle.yaml'
          || inputs.keyboard == 'splitkb_aurora_corne' && 'build/splitkb_aurora_corne.yaml'
          || inputs.keyboard == 'splitkb_aurora_corne_dongle' && 'build/splitkb_aurora_corne_dongle.yaml'
          || 'build.yaml' }}

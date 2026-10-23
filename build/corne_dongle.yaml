@@ -1,0 +1,25 @@
+# SuperMini nRF52840 + Mifuny Corne v3 Choc v1, wired to a Halcyon Dongle
+# instead of talking BLE-to-host directly
+# (https://docs.splitkb.com/product-guides/halcyon-dongle/firmware).
+# Used standalone by the "Build one keyboard" workflow
+# (keyboard: "corne_dongle").
+#
+# The dongle takes over the central role, so the left half (normally
+# central, see build/corne.yaml) is force-flipped to peripheral here via
+# cmake-args. The right half is unaffected -- it's always a peripheral,
+# dongle or not -- and its firmware is identical to the one built in
+# build/corne.yaml.
+---
+include:
+  - board: halcyon_dongle//zmk
+    shield: corne_dongle
+  - board: nice_nano//zmk
+    shield: corne_left
+    cmake-args: -DCONFIG_ZMK_SPLIT_ROLE_CENTRAL=n
+    artifact-name: corne_left_peripheral
+  - board: nice_nano//zmk
+    shield: corne_right
+  - board: nice_nano//zmk
+    shield: settings_reset
+  - board: halcyon_dongle//zmk
+    shield: settings_reset

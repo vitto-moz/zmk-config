@@ -1,0 +1,25 @@
+if SHIELD_CORNE_DONGLE
+
+config ZMK_KEYBOARD_NAME
+    # Max 16 chars for the BLE device name.
+    default "Corne"
+
+config ZMK_SPLIT
+    default y
+
+config ZMK_SPLIT_ROLE_CENTRAL
+    default y
+
+# The two Corne halves connect to the dongle instead of to each other.
+config ZMK_SPLIT_BLE_CENTRAL_PERIPHERALS
+    default 2
+
+# Default BT_MAX_CONN/PAIRED (5) only budgets for host BLE profiles; add
+# headroom for the 2 peripheral connections on top of those.
+config BT_MAX_CONN
+    default 7
+
+config BT_MAX_PAIRED
+    default 7
+
+endif # SHIELD_CORNE_DONGLE
